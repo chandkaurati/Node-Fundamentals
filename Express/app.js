@@ -15,7 +15,7 @@ const app = express()
 // we just have to add this method so  tha the all data will be passed in to the Json() 
 app.use(express.json())
 
-const cources = [
+  let  cources = [
      {id:1, name :"jvascript"},
      {id:2, name :"python"},
      {id:3, name :"Java"},
@@ -39,11 +39,11 @@ app.get('/contact/myinfo', (req,res)=>{
 })
 
                                  
-app.get('/cources',(req,res)=>{
+app.get('/courses',(req,res)=>{
      res.send(cources)
 })
 
-app.post('/cources', (req, res)=>{
+app.post('/courses', (req, res)=>{
      const cource = {
           id :cources.length  + 1,
           name : req.body.name  
@@ -52,13 +52,48 @@ app.post('/cources', (req, res)=>{
      cources.push(cource)
      res.send(cource)
 })
-// Route parameters
- app.get('/courses/:id', (req,res)=>{
-    let course = cources.find(course => course.id === parseInt(req.params.id))
-     console.log(req.params.id)
-   if(!course)res.status(404).send("This course not available")
+
+// put Method
+app.put('/courses/:name', (req,res)=>{
+     let course = cources.find(course => course.name === req.params.name)
+    if(!course)res.status(404).send("This course not available")
+  
+    course.name  = req.body.name
     res.send(course)
- })
+  })
+  //Delete method with name 
+//   app.delete('/courses/:name', (req,res)=>{
+//      let updatedcources = cources.filter(course => course.name !== req.params.name)
+     
+//       cources  =  updatedcources
+//       res.send(cources)
+  
+//   })
+
+//   delete method  with ID
+
+app.delete('/courses/:id', (req,res)=>{
+     let  cource  = cources.find(course => course.id === parseInt( req.params.id))
+     if(!cource)res.status(404).send("This course not available")
+    
+      let index = cources.indexOf(cource)
+      cources.splice(index, 1)
+      
+      res.send(cource)
+  })
+
+
+  // Route parameters
+
+  app.get('/courses/:id', (req,res)=>{
+     let course = cources.find(course => course.id === parseInt(req.params.id))
+ 
+     if(!course)res.status(404).send("This course not available")
+      console.log(req.params.id)
+    if(!course)res.status(404).send("This course not available")
+     res.send(course)
+  })
+
 
 
 const Port =  process.env.PORT || 3000
