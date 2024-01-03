@@ -1,5 +1,8 @@
 const express  = require("express")
 
+const  middleweareFn = require("./middleweares/middle")
+ 
+const middleweare_tow =  require("./middleweares/midd_2")
 const app = express()
 // HTTP methods
 // get, post, put , delete 
@@ -14,6 +17,9 @@ const app = express()
 // Middle weare // the middlewere is basically Express.json()
 // we just have to add this method so  tha the all data will be passed in to the Json() 
 app.use(express.json())
+
+app.use(middleweareFn)
+app.use(middleweare_tow)
 
   let  cources = [
      {id:1, name :"jvascript"},
