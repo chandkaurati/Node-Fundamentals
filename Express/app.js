@@ -4,6 +4,10 @@ const  middleweareFn = require("./middleweares/middle")
  
 const middleweare_tow =  require("./middleweares/midd_2")
 const app = express()
+
+const morgan = require('morgan')
+
+app.use(morgan('tiny'))
 // HTTP methods
 // get, post, put , delete 
 
