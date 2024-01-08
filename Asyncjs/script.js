@@ -11,9 +11,10 @@ console.log("f line")
     }
 
     console.log(`file one data ${data}`)
+    fs.readFile('File2.md', callbacktow)
 }
 
-fs.readFile('File2.md', callbacktow)
+
 
  function  callbacktow  (err, data){
     if(err){
@@ -21,6 +22,17 @@ fs.readFile('File2.md', callbacktow)
     }
 
     console.log(`fil two  data ${data}`)
+    fs.readFile('file3.md',callback3)
+}
+
+
+
+function callback3(err,data){
+  if(err){
+    console.log(err)
+  }
+
+  console.log(` read file sycnchronously${data}`)
 }
 
 console.log("last line")
